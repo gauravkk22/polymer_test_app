@@ -1,0 +1,61 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id='api-element'>
+	<template>
+		<style>
+			*{
+				box-sizing: content-box;
+			}
+			:host{
+				color:white;
+				width:99vw;
+				height:auto;
+				display:flex;
+				flex-wrap: wrap;
+				align-items:center;
+				justify-content: center;
+				/*text-align: center;*/
+				font-size: 30px;
+				background: black;
+				letter-spacing: 2px;
+				font-weight: bolder;
+				overflow-x: hidden;
+			}
+			a:visited{
+				color: blue;
+			}
+			a:link{
+				color:#efefef;
+			}
+
+			a:hover{
+				color: white;
+			}
+
+			a:active{
+				color: yellow;
+			}
+		</style>
+
+
+        Repositories:
+        <template is="dom-repeat" items="[[repos]]">
+            <a href='#' class="item-name">{{item.name}}</span>
+        </template>
+
+	</template>
+
+	<script>
+		Polymer({
+			is: 'api-element',
+			properties: {
+				item: {
+					type: Array
+				}
+			}
+		});
+	</script>
+
+
+</dom-module>

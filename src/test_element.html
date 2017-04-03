@@ -1,0 +1,53 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html" />
+
+<dom-module id='test-element'>
+	<template>
+		<style>
+			:host{
+				color:white;
+				height:85vh;
+				display:flex;
+				align-items:center;
+				justify-content: center;
+				text-align: center;
+				font-size: 30px;
+				background: black;
+				letter-spacing: 2px;
+				font-weight: bolder;
+			}
+		</style>
+		<div class="greeting">{{greeting}}</div>
+	</template>
+
+	<script>
+		Polymer({
+			is: 'test-element',
+			properties: {
+				greeting: {
+					type: String,
+					value: "This is my test element"
+				}
+			},
+			created: function() {
+				this.textContext = 'My text context';
+				console.log('Your element has been created Gaurav', this.textContext);
+
+			},
+			ready: function() {
+				console.log('Your element is ready', this.greeting);
+			},
+			attached: function() {
+				console.log('Your component has been attached ', this.greeting);
+			},
+			detached: function() {
+				console.log('Your component has been detached', this.greeting);
+			},
+			attributeChanged: function() {
+				console.log('The attributes have changed', this.greeting);
+			}
+		});
+	</script>
+
+</dom-module>
+>

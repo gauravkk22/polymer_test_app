@@ -1,0 +1,111 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="test_element.html">
+<link rel="import" href="my-icons.html">
+<link rel="import" href="page-not-found.html" />
+<link rel="import" href="api-element.html" />
+
+<dom-module id="my-app">
+    <template>
+    <style>
+      :host {
+        --app-primary-color: #4285f4;
+        --app-secondary-color: black;
+
+        display: block;
+      }
+      .heading{
+          width:100vw;
+          height:auto;
+          padding:10px;
+          font-size: 40px;
+          font-weight:bolder;
+          color:red;
+          display:flex;
+          align-items:center;
+          justify-content: center;
+      }
+      .menu-wrapper{
+          display:flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          width:100vw;
+          height:auto;
+      }
+      .menu-item{
+          cursor:pointer;
+          padding: 10px;
+      }
+    </style>
+    <app-location route={{route}}></app-location>
+    <app-route
+        id="route"
+        route="{{route}}"
+        pattern="/:page"
+        data="{{routeData}}"
+        tail="{{subroute}}">
+    </app-route>
+    <div class="heading">Welcome to the Home Page</div>
+    <div class="menu-wrapper">
+        <a href="#" class="menu-item" name="testpage" on-tap="_changeRoute">Test Element Page</a>
+        <a href="#" class="menu-item" name="projects" on-tap="_changeRoute">Api Element Page</a>
+    </div>
+    <iron-pages selected="[[page]]" attr-for-selected="name" selected-attribute="visible" fallback-selection="page-not-found">
+      <test-element name="testpage" route="{{subroute}}"></test-element>
+      <api-element name="projects" route="{{subroute}}"></api-element>
+      <page-not-found name="page-not-found"></page-not-found>
+    </iron-pages>
+  </template>
+
+    <script>
+        Polymer({
+            is: 'my-app',
+            properties: {
+                page: {
+                    type: String,
+                    reflectToAttribute: true,
+                }
+            },
+            observers: [
+                '_routePageChanged(routeData.page)'
+            ],
+            ready: function() {
+                console.log('component ready');
+            },
+            attached: function() {
+                console.log('component attached');
+                if (!this.page) {
+                    this.page = 'testpage';
+                }
+            },
+            _routePageChanged: function(page) {
+                this.page = page;
+            },
+            _changeRoute: function(event) {
+                console.log('reached _changedRoute', event.target.name);
+                this.set('route.path', event.target.name);
+            },
+        });
+    </script>
+</dom-module>

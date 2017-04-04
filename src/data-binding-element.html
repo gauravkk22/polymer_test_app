@@ -1,0 +1,27 @@
+<dom-module id="data-binding-element">
+	<template>
+		<style>
+		</style>
+		<input type="text" value='{{message}}'>
+		<div>[[message]]</div>
+	</template>
+	<script>
+		Polymer({
+			is: 'data-binding-element',
+			properties: {
+				someProp: {
+					type: String,
+					notify: true,
+					reflectToAttribute: true
+				},
+				message: {
+					type: String,
+					value: ''
+				}
+			},
+			attached: function() {
+				console.log('inside data binding element', this.someProp);
+			}
+		})
+	</script>
+</dom-module>

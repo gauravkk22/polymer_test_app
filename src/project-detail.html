@@ -1,7 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 
-<dom-module id='api-element'>
+<dom-module id='project-detail-element'>
 	<template>
 		<style>
 			*{
@@ -40,15 +40,15 @@
 
 
         Repositories:
-        <template is="dom-repeat" items="[[repos]]">
-            <a href='#' class="item-name">{{item.name}}</span>
+        <template is="dom-repeat" items="[[repos]]" as="item" >
+            <a href='/[[item.name]]' class="item-name">[[item.name]]</span>
         </template>
 
 	</template>
 
 	<script>
 		Polymer({
-			is: 'api-element',
+			is: 'project-detail-element',
 			properties: {
 				item: {
 					type: Array

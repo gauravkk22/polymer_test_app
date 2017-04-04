@@ -16,8 +16,17 @@
 				letter-spacing: 2px;
 				font-weight: bolder;
 			}
+			content{
+				width:100vw;
+				height:auto;
+				display:flex;
+				align-items: center;
+				justify-content: center;
+			}
+
 		</style>
 		<div class="greeting">{{greeting}}</div>
+		<content id="myContent"></content>
 	</template>
 
 	<script>
@@ -36,9 +45,13 @@
 			},
 			ready: function() {
 				console.log('Your element is ready', this.greeting);
+				var distributed = this.getContentChildren("#myContent");
+				console.log('distributed length', distributed.length);
 			},
 			attached: function() {
 				console.log('Your component has been attached ', this.greeting);
+				this.childCount = Polymer.dom(this).children.length;
+				console.log('childCount', this.childCount);
 			},
 			detached: function() {
 				console.log('Your component has been detached', this.greeting);

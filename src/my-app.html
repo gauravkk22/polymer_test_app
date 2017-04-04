@@ -24,6 +24,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="my-icons.html">
 <link rel="import" href="page-not-found.html" />
 <link rel="import" href="api-element.html" />
+<link rel="import" href="drag-element.html" />
+<link rel="import" href="data-binding-element.html" />
 
 <dom-module id="my-app">
     <template>
@@ -57,6 +59,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           cursor:pointer;
           padding: 10px;
       }
+      footer{
+          color:white;
+          width:100vw;
+          height:10vh;
+          display:flex;
+          align-items:center;
+          justify-content: center;
+          text-align: center;
+          font-size: 30px;
+          background: #3F51B5;
+          letter-spacing: 2px;
+          font-weight: bolder;
+      }
     </style>
     <app-location route={{route}}></app-location>
     <app-route
@@ -70,12 +85,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div class="menu-wrapper">
         <a href="#" class="menu-item" name="testpage" on-tap="_changeRoute">Test Element Page</a>
         <a href="#" class="menu-item" name="projects" on-tap="_changeRoute">Api Element Page</a>
+        <a href="#" class="menu-item" name="drag" on-tap="_changeRoute">Drag Element Page</a>
+        <a href="#" class="menu-item" name="bindingpage" on-tap="_changeRoute">Data Binding El Page</a>
     </div>
     <iron-pages selected="[[page]]" attr-for-selected="name" selected-attribute="visible" fallback-selection="page-not-found">
-      <test-element name="testpage" route="{{subroute}}"></test-element>
-      <api-element name="projects" route="{{subroute}}"></api-element>
-      <page-not-found name="page-not-found"></page-not-found>
+      <test-element hidden$="[[!page]]" name="testpage" route="{{subroute}}"><div>Content </div></test-element>
+      <api-element hidden$="[[!page]]" name="projects" route="{{subroute}}" user-name="Gaurav"></api-element>
+      <page-not-found hidden$="[[!page]]" name="page-not-found"></page-not-found>
+      <drag-element hidden$="[[!page]]" name="drag" route="{{subroute}}"></drag-element>
+      <data-binding-element hidden$="[[!page]]" name="bindingpage" route="{{subroute}}" some-prop="{{page}}"></data-binding-element>
     </iron-pages>
+    <footer>
+        <span>© 2017 My Company. All rights reserved.</span>
+    </footer>
   </template>
 
     <script>
